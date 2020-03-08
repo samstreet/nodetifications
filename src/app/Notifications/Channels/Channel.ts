@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+import * as mongoose from 'mongoose';
 
 abstract class Channel {
     protected toLog() {
-        
+        mongoose
     }
 }
 

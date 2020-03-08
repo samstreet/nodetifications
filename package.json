@@ -9,6 +9,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.3",
+    "nodemailer": "^6.4.4",
     "typescript": "^3.8.3"
   },
   "devDependencies": {},
