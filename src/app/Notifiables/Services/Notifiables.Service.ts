@@ -14,6 +14,7 @@ export default class NotifiablesService {
         .then((notifiable) => {
             return callback(null, notifiable);
         }).catch((e) => {
+            console.log(e);
             return callback(e, null);
         });
     }

@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import Notifiable from './Notifiable.Interface';
+import { Notifiable } from './Notifiable.Interface';
 
 const notifiableSchema = new mongoose.Schema({
     sfid: Number,

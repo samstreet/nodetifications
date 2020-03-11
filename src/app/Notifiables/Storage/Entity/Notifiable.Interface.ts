@@ -1,4 +1,4 @@
-export default interface Notifable {
+export interface Notifiable {
     sfid: Number,
     channels: Object
 }

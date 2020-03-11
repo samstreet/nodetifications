@@ -11,5 +11,5 @@ const app = new Application([
     new NotifiablesChannelsController(new NotifiablesChannelsService()),
     new NotifiablesController()
 ], 3000);
- 
+
 app.listen();

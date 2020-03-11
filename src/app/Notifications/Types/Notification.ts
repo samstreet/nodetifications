@@ -1,10 +1,11 @@
 import { NotificationChannels } from "./Notification.Interface";
-import Notifiable from '../../Notifiables/Storage/Entity/Notifiable.Interface';
+import { Notifiable } from '../../Notifiables/Storage/Entity/Notifiable.Interface';
 
-export default abstract class Notification implements NotificationChannels{
-    via: string[];    
-    
-    constructor(public notifiable: Notifiable) {}
+export default abstract class Notification implements NotificationChannels {
+    via: string[];
+    public content: object;
+
+    protected constructor(public notifiable: Notifiable) {}
 
     getChannels(): string[] {
         return this.via
@@ -18,7 +19,7 @@ export default abstract class Notification implements NotificationChannels{
             }
             
             let fn = "via" + via.charAt(0).toUpperCase() + via.substring(1);
-            this[fn].apply();
+            this[fn].apply(this);
         });
     }
 }
