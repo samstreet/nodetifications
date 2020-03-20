@@ -1,9 +1,9 @@
 import * as express from 'express';
 import Controller from '../../../Core/Http/Controllers/Controller.Interface';
 import NotificationService from '../../Services/Notification.Service';
-import TestNotification from '../../Types/Test.Notification';
-import HelloNotification from '../../Types/Hello.Notification';
 import NotifiablesService from '../../../Notifiables/Services/Notifiables.Service';
+import Notification from "../../Types/Notification";
+import NotificationFactory from "../../Factories/Notification.Factory";
 
 class NotificationController implements Controller {
     path = '/notifications';
@@ -20,15 +20,19 @@ class NotificationController implements Controller {
     
     private initializeRoutes() {
         this.router.post(this.path, (request: express.Request, response: express.Response) => {
-            this.notifiableService.findNotifiable(1, (err, notifiable) => {
+            console.log(request.body);
+
+            this.notifiableService.findNotifiable(request.body['sfid'], (err, notifiable) => {
                 if(err !== null) {
                     return response.status(404).send();
                 }
-                
-                this.notificationService.send(new TestNotification(notifiable));
-                this.notificationService.send(new HelloNotification(notifiable));
-                response.status(201).send();
+
+                let c = (new NotificationFactory).instance(request.body.notification, notifiable);
+                this.notificationService.send(c);
+                return response.status(201).send();
             });
+
+            return response.status(201).send();
         });
     }
 }

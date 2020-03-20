@@ -17,7 +17,7 @@ export default class PushChannel extends Channel {
 
             axios.post('https://push.techulus.com/api/v1/notify', { title: notification.content[this.channelType()].title, body: notification.content[this.channelType()].title }, options)
                 .then((response) => {
-                    console.log(response);
+
                 })
                 .catch((e) => {
                     console.log(e);

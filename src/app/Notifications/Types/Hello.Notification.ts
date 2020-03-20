@@ -5,7 +5,7 @@ import EmailChannel from '../Channels/Email.Channel';
 import PushChannel from '../Channels/Push.Channel';
 
 export default class HelloNotification extends Notification implements NotificationViaEmail, NotificationViaPush {
-    public via = ['push', 'email'];
+    public via = ['email', 'push'];
     content = {
         push : {
             "title": "Hello Notification",
@@ -18,7 +18,7 @@ export default class HelloNotification extends Notification implements Notificat
     }
 
     viaEmail(): boolean {
-        this.content["email"] = this.getEmailContent();
+        this.content["email"] = this.getEmailContent('../Templates/hello.hbs');
 
         let channel = new EmailChannel();
         channel.send(this.notifiable, this);
@@ -33,13 +33,4 @@ export default class HelloNotification extends Notification implements Notificat
         return true;
     }
 
-    private getEmailContent(): string {
-        let body = Math.random().toString();
-        return '<html>' +
-            '<body>' +
-            '<h1>Title</h1>' +
-            '<p>'+body+'</p>' +
-            '</body>' +
-            '</html>';
-    }
 }

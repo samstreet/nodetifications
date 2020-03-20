@@ -3,9 +3,12 @@ import { NotificationViaEmail, NotificationViaPush } from './Notification.Interf
 import { Notifiable } from '../../Notifiables/Storage/Entity/Notifiable.Interface';
 import EmailChannel from '../Channels/Email.Channel';
 import PushChannel from '../Channels/Push.Channel';
+import * as fs from "fs";
+import * as path from "path";
+import * as handlebars from "handlebars";
 
 export default class TestNotification extends Notification implements NotificationViaEmail, NotificationViaPush {
-    public via = ['push'];
+    public via = ['email', 'push'];
     content = {
         "push" : {
             "title": "Test Notification",
@@ -18,6 +21,7 @@ export default class TestNotification extends Notification implements Notificati
     }
 
     viaEmail(): boolean {
+        this.content["email"] = this.getEmailContent('../Templates/test.hbs');
 
         let channel = new EmailChannel();
         channel.send(this.notifiable, this);
