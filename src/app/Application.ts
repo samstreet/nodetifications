@@ -5,6 +5,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as handlebars from 'handlebars';
 import Controller from './Core/Http/Controllers/Controller.Interface';
+import * as callback from '';
  
 class Application {
   public app: express.Application;
@@ -40,7 +41,10 @@ class Application {
   }
 
   private initializeDatabaseConnection() {
-    mongoose.connect(`mongodb://0.0.0.0:27017/notifications`, { useUnifiedTopology: true, useNewUrlParser: true });
+    mongoose.connect(`mongodb+srv://root:root@cluster0-6ew4x.mongodb.net/notifications?retryWrites=true&w=majority`, { useUnifiedTopology: true, useNewUrlParser: true })
+        .catch((error) => {
+          console.log(error);
+        });
   }
 
   private initialiseHandlebars() {

@@ -20,9 +20,9 @@ class NotificationController implements Controller {
     
     private initializeRoutes() {
         this.router.post(this.path, (request: express.Request, response: express.Response) => {
-            console.log(request.body);
 
             this.notifiableService.findNotifiable(request.body['sfid'], (err, notifiable) => {
+                console.log(notifiable);
                 if(err !== null) {
                     return response.status(404).send();
                 }
